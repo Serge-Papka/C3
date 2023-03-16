@@ -1,13 +1,7 @@
-"""Сделайте функцию, которая принимает от пользователя путь и выводит всю информацию о содержимом этой папки.
-Для реализации используйте функцию встроенного модуля os.walk(). Если путь не указан, то сравнение начинается с
-текущей директории."""
-import os
+f = open('test.txt', 'r', encoding='utf8')
 
+print(f.readline())  # This is a test string
+print(f.read(4))  # This
+print(f.readline())  # is a new string
 
-def path_a (path = os.getcwd()):
-    path_ = os.walk(path)
-    for i in path_:
-        print(i)
-
-path_a("D:\Games\ELDEN RING\Game")
-
+f.close()
