@@ -126,3 +126,4 @@ LL.pushleft(4)
 LL.pushright(5)
 LL.popleft()
 print(LL.__len__())
+.
