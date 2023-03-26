@@ -4,28 +4,50 @@ array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 array = [9, 8, 7, 6, 5, 4, 3, 2, 1]
 
 
-def qsort(array, left, right):
-    middle = (left + right) // 2
+def merge_sort(L):  # «разделяй»
+    if len(L) < 2:  # если кусок массива равен 2,
+        return L[:]  # выходим из рекурсии
+    else:
+        middle = len(L) // 2  # ищем середину
+        left = merge_sort(L[:middle])  # рекурсивно делим левую часть
+        right = merge_sort(L[middle:])  # и правую
+        return merge(left, right)  # выполняем слияние
 
-    p = array[middle]
-    i, j = left, right
-    while i <= j:
-        while array[i] < p:
+
+def merge(left, right):  # «властвуй»
+    global count
+    result = []  # результирующий массив
+    i, j = 0, 0  # указатели на элементы
+
+    # пока указатели не вышли за границы
+    while i < len(left) and j < len(right):
+
+        if left[i] < right[j]:
+            result.append(left[i])
             i += 1
-        while array[j] > p:
-            j -= 1
-        if i <= j:
-            array[i], array[j] = array[j], array[i]
-            i += 1
-            j -= 1
+            count += 1
+        else:
+            result.append(right[j])
+            j += 1
+            count += 1
 
-    if j > left:
-        qsort(array, left, j)
-    if right > i:
-        qsort(array, i, right)
+    # добавляем хвосты
+    while i < len(left):
+        result.append(left[i])
+        i += 1
+        # count += 1
 
-# print(merge_sort(array))
-# print(count)
+    while j < len(right):
+        result.append(right[j])
+        j += 1
+        # count += 1
+    print(count)
+    return result
+
+
+
+print(merge_sort(array))
+print(count)
 #
 # В начале итерации устанавливается ведущий элемент. На первой итерации — самый первый элемент и по умолчанию он
 # считается уже отсортированным.
